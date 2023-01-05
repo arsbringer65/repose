@@ -36,8 +36,8 @@ class Auth
     public function add_users($data)
     {
 
-        $sql = "INSERT INTO users(stud_no, fname, lname , password, authority)
-            VALUES('$data->stud_no', '$data->fname', '$data->lname', ?, 'user')";
+        $sql = "INSERT INTO employees(fname, lname , email , dpt, position, password)
+            VALUES('$data->fname', '$data->lname', '$data->email', '$data->dpt', '$data->position', ?);";
 
         try {
             $stmt = $this->pdo->prepare($sql);

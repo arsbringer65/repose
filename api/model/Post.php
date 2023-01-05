@@ -11,19 +11,19 @@ class Post {
     }
 
 
-    public function add_queue($data){
-        $sql = "INSERT INTO queu(name, email, queu_no, dpt) 
-        VALUES (?,?,?,?)";
-        try{
+    public function add_request($data)
+    {
+
+        $sql = "INSERT INTO requests(user_id, leave_type, starting_time, ending_time, status)
+            VALUES(?,?,?,?,'pending');";
+
+        try {
             $stmt = $this->pdo->prepare($sql);
-            $stmt->execute([$data->name, $data->email, $data->queu_no, $data->dpt]);
-            return $this->gm->response_payload($data, "success", "Succesfully inserted data.", 200);
-        }
-        catch(PDOException $e){
+            $stmt->execute([$data->user_id, $data->leave_type, $data->starting_time, $data->ending_time]);
+            return $this->gm->response_payload($data, "success", "Succesfully added queu.", 200);
+        } catch (PDOException $e) {
             return $this->gm->response_payload(null, "failed", $e->getMessage(), 400);
         }
-        
-        
     }
 
     public function add_user($data)
@@ -62,101 +62,6 @@ class Post {
             return $this->gm->response_payload(null, "failed", $e->getMessage(), 400);
         }  
     }
-
-    // Registrar
-    public function add_registrar($data)
-    {
-        $sql = "SELECT MAX(queue_no) FROM registrar_queue";
-
-        $stmt = $this->pdo->prepare($sql);
-
-        // Execute the statement
-        $stmt->execute();
-
-        // Fetch the result
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // Extract the maximum queue number from the result array
-        $max = $result['MAX(queue_no)'];
-
-        // Increment the maximum queue number by 1 to get the next queue number
-        $next = $max + 1;
-
-        $sql = "INSERT INTO registrar_queue(stud_no, queue_no, purpose) 
-        VALUES (?, $next, ?)";
-        try {
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute([$data->stud_no, $data->purpose]);
-            return $this->gm->response_payload($data, "success", "Succesfully inserted data.", 200);
-        } catch (PDOException $e) {
-            return $this->gm->response_payload(null, "failed", $e->getMessage(), 400);
-        }
-    }
-
-    // Clinic
-    public function add_clinic($data)
-    {
-        
-        $sql = "SELECT MAX(queue_no) FROM clinic_queue";
-
-        $stmt = $this->pdo->prepare($sql);
-
-        // Execute the statement
-        $stmt->execute();
-
-        // Fetch the result
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // Extract the maximum queue number from the result array
-        $max = $result['MAX(queue_no)'];
-
-        // Increment the maximum queue number by 1 to get the next queue number
-        $next = $max + 1;
-
-        $sql = "INSERT INTO clinic_queue(stud_no, queue_no, purpose) 
-        VALUES (?, $next, ?)";
-        try {
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute([$data->stud_no, $data->purpose]);
-            return $this->gm->response_payload($data, "success", "Succesfully inserted data.", 200);
-        } catch (PDOException $e) {
-            return $this->gm->response_payload(null, "failed", $e->getMessage(), 400);
-        }
-    }
-
-
-    // COOP
-    public function add_coop($data)
-    {
-        $sql = "SELECT MAX(queue_no) FROM coop_queue";
-
-        $stmt = $this->pdo->prepare($sql);
-
-        // Execute the statement
-        $stmt->execute();
-
-        // Fetch the result
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // Extract the maximum queue number from the result array
-        $max = $result['MAX(queue_no)'];
-
-        // Increment the maximum queue number by 1 to get the next queue number
-        $next = $max + 1;
-
-        $sql = "INSERT INTO coop_queue(stud_no, queue_no, purpose) 
-        VALUES (?, $next, ?)";
-        try {
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute([$data->stud_no, $data->purpose]);
-            return $this->gm->response_payload($data, "success", "Succesfully inserted data.", 200);
-        } catch (PDOException $e) {
-            return $this->gm->response_payload(null, "failed", $e->getMessage(), 400);
-        }
-    }
-
-
-
 
 
 }

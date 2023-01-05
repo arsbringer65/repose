@@ -39,7 +39,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 break;
 
             case 'addrequest':
-                echo json_encode($post->add_queue($data));
+                echo json_encode($post->add_request($data));
                 break;
 
             case 'addemployee':
@@ -64,42 +64,51 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
     case 'GET':
         switch ($request[0]) {
-            case 'users':
+            case 'employees':
                 if (count($request) > 1) {
-                    echo json_encode($get->get_users($request[1]));
+                    echo json_encode($get->get_employee($request[1]));
                 } else {
-                    echo json_encode($get->get_users());
+                    echo json_encode($get->get_employee());
                 }
                 break;
 
-            case 'queues':
+            case 'requests':
                 if (count($request) > 1) {
-                    echo json_encode($get->get_clinic_queue($request[1]));
+                    echo json_encode($get->get_employee($request[1]));
                 } else {
-                    echo json_encode($get->get_clinic_queue());
+                    echo json_encode($get->get_employee());
                 }
                 break;
-            case 'registrar':
+
+            case 'employeecounts':
                 if (count($request) > 1) {
-                    echo json_encode($get->get_registrar_queue($request[1]));
+                    echo json_encode($get->get_employeecount($request[1]));
                 } else {
-                    echo json_encode($get->get_registrar_queue());
+                    echo json_encode($get->get_employeecount());
                 }
                 break;
-            case 'clinic':
+            case 'requestcounts':
                 if (count($request) > 1) {
-                    echo json_encode($get->get_clinic_queue($request[1]));
+                    echo json_encode($get->get_requestcount($request[1]));
                 } else {
-                    echo json_encode($get->get_clinic_queue());
+                    echo json_encode($get->get_requestcount());
                 }
                 break;
-            case 'coop':
+            case 'pendingcounts':
                 if (count($request) > 1) {
-                    echo json_encode($get->get_coop_queue($request[1]));
+                    echo json_encode($get->get_pendingcount($request[1]));
                 } else {
-                    echo json_encode($get->get_coop_queue());
+                    echo json_encode($get->get_pendingcount());
                 }
                 break;
+            case 'approvedcounts':
+                if (count($request) > 1) {
+                    echo json_encode($get->get_approvedcount($request[1]));
+                } else {
+                    echo json_encode($get->get_approvedcount());
+                }
+                break;
+            
 
 
             default:

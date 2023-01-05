@@ -1,7 +1,7 @@
 import React from 'react';
 import Calendartable from '../components/Calendartable';
 
-const User_Calendar = () => {
+const UserCalendar = () => {
     return (
         <div>
             <Calendartable />

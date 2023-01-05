@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import axios from "axios"
 
 // ICONS
 import {
@@ -10,9 +11,62 @@ import {
 import { BsInfoSquare } from "react-icons/bs";
 
 // Style
-import "../style/dashgrid.css";
+import "../style/admin/dashgrid.css";
 
 const DashGrid = () => {
+  const [employeeCount, setEmployeeCount] = useState(null);
+  const [requestCount, setRequestCount] = useState(null);
+  const [pendingCount, setPendingCount] = useState(null);
+  const [approvedCount, setApprovedCount] = useState(null);
+
+  const getEmployeeCount = () => {
+    axios
+      .get("http://localhost/repose/api/employeecounts")
+      .then((res) => {
+        setEmployeeCount(res.data.total);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  const getRequestCount = () => {
+    axios
+      .get("http://localhost/repose/api/requestcounts")
+      .then((res) => {
+        setRequestCount(res.data.total);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  const getPendingCount = () => {
+    axios
+      .get("http://localhost/repose/api/pendingcounts/")
+      .then((res) => {
+        setPendingCount(res.data.total);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  const getApprovedCount = () => {
+    axios
+      .get("http://localhost/repose/api/pendingcounts/")
+      .then((res) => {
+        setPendingCount(res.data.total);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  useEffect(() => {
+    getEmployeeCount();
+    getRequestCount();
+    getPendingCount();
+    getApprovedCount();
+  }, []);
+
   return (
     <div className="grid-container">
       <div className="employee-grid">
@@ -22,7 +76,7 @@ const DashGrid = () => {
         <div>
           <h2 className="employee">Employees</h2>
           <div className="count1">
-            <h1>00</h1>
+            <h1>{employeeCount}</h1>
           </div>
         </div>
       </div>
@@ -33,7 +87,7 @@ const DashGrid = () => {
         <div>
           <h2 className="leave">Leaves</h2>
           <div className="count2">
-            <h1>00</h1>
+            <h1>{requestCount}</h1>
           </div>
         </div>
       </div>
@@ -44,7 +98,7 @@ const DashGrid = () => {
         <div>
           <h2 className="approved">Approved</h2>
           <div className="count3">
-            <h1>00</h1>
+            <h1>{approvedCount}</h1>
           </div>
         </div>
       </div>
@@ -55,7 +109,7 @@ const DashGrid = () => {
         <div>
           <h2 className="pending">Pending</h2>
           <div className="count4">
-            <h1>00</h1>
+            <h1>{pendingCount}</h1>
           </div>
         </div>
       </div>

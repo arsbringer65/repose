@@ -1,34 +1,21 @@
-import React from 'react';
-import LeaveForm from '../user/ApplyLeave';
-import { useEffect } from 'react';
-import Navbar from '../components/Navbar';
-import Sidebar from '../components/Sidebar';
-
+import React from "react";
+import "../style/admin/leaves.css";
 
 const Leaves = () => {
-    useEffect(() => {
-      const checkAuth = async () => {
-        try {
-          const session = localStorage.getItem("session");
-          if (!session) {
-            throw new Error("Not authenticated");
-          }
-        } catch (err) {
-          window.location.href = "/login";
-        }
-      };
-      checkAuth();
-    }, []);
-
-    return (
-        <div className="leaves-container">
-            <h1>Leaves</h1>
-
-            <div className="leave-box">
-                <LeaveForm/>
-            </div>
+  return (
+    <div>
+      <div className="leaves">
+        <div className="profile">
+            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="profile"></img>
+            <p>Name...</p>
         </div>
-    );
-}
+        <div className="leave-type">
+          <p>Leave Type</p>
+        </div>
+        <button>Open</button>
+      </div>
+    </div>
+  );
+};
 
 export default Leaves;

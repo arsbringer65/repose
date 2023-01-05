@@ -9,21 +9,19 @@ import Navbar from "../Navbar";
 import Calendar from "../../pages/Calendar";
 import Dashboard from "../../pages/Dashboard";
 import Leaves from "../../pages/Leaves";
-import Login from "../../pages/Login";
 
 const Router = () => {
     return (
         <div>
         <BrowserRouter>
-        <Navbar/>
-        <Sidebar>
+        <Navbar />
+          <Sidebar>
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/leaves" element={<Leaves />} />
-              <Route path="/login" element={<Login />} />
             </Routes>
-        </Sidebar>
+          </Sidebar>
         </BrowserRouter>
         </div>
     );
