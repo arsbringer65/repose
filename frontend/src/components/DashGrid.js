@@ -19,46 +19,59 @@ const DashGrid = () => {
   const [pendingCount, setPendingCount] = useState(null);
   const [approvedCount, setApprovedCount] = useState(null);
 
-  const getEmployeeCount = () => {
-    axios
-      .get("http://localhost/repose/api/employeecounts")
-      .then((res) => {
-        setEmployeeCount(res.data.total);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+  const getEmployeeCount = async () => {
+    try {
+      const res = await axios.get("http://localhost/repose/api/employeecounts");
+      setEmployeeCount(res.data.total);
+    } catch (err) {
+      console.error(err);
+    }
   };
-  const getRequestCount = () => {
-    axios
-      .get("http://localhost/repose/api/requestcounts")
-      .then((res) => {
-        setRequestCount(res.data.total);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+
+  const getRequestCount = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost/repose/api/requestcounts"
+      );
+      setRequestCount(response.data.total);
+    } catch (err) {
+      console.error(err);
+    }
   };
-  const getPendingCount = () => {
-    axios
-      .get("http://localhost/repose/api/pendingcounts/")
-      .then((res) => {
-        setPendingCount(res.data.total);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+
+  const getPendingCount = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost/repose/api/pendingcounts/"
+      );
+      setPendingCount(response.data.total);
+    } catch (err) {
+      console.error(err);
+    }
   };
-  const getApprovedCount = () => {
-    axios
-      .get("http://localhost/repose/api/pendingcounts/")
-      .then((res) => {
-        setPendingCount(res.data.total);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+
+  const getApprovedCount = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost/repose/api/approvedcounts/"
+      );
+      setApprovedCount(response.data.total);
+    } catch (err) {
+      console.error(err);
+    }
   };
+
+  const getDeclinedCount = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost/repose/api/declinecounts/"
+      );
+      setApprovedCount(response.data.total);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
 
   useEffect(() => {
     getEmployeeCount();

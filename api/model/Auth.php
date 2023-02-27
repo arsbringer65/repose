@@ -36,7 +36,9 @@ class Auth
     public function add_users($data)
     {
 
-        $sql = "INSERT INTO employees(fname, lname , email , dpt, position, password)
+        // $sql = "INSERT INTO employees(fname, lname , email , dpt, position, password)
+        //     VALUES('$data->fname', '$data->lname', '$data->email', '$data->dpt', '$data->position', ?);";
+        $sql = "INSERT INTO users(fname, lname , email , dpt, position, password)
             VALUES('$data->fname', '$data->lname', '$data->email', '$data->dpt', '$data->position', ?);";
 
         try {

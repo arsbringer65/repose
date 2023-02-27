@@ -82,6 +82,17 @@ class Get {
     return $result = $stmt->fetch(PDO::FETCH_ASSOC);
   }
 
+  public function get_declinedcount($id = null)
+  {
+
+    $sql = "SELECT COUNT(*) as total FROM requests WHERE status = 'approved';";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute();
+
+
+    return $result = $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+
   
 
 

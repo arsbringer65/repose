@@ -14,6 +14,10 @@ const Sidebar = ({ children }) => {
       name: "Dashboard",
     },
     {
+      path: "/encoding",
+      name: "Encoding",
+    },
+    {
       path: "/leaves",
       name: "Leaves",
     },
